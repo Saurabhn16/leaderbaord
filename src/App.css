@@ -1,0 +1,274 @@
+/* General Styling */
+body {
+  font-family: "Open Sans", sans-serif;
+  line-height: 1.25;
+}
+
+/* Light Mode Styles */
+.light-mode {
+  background-color: white;
+  color: black;
+}
+
+.light-mode table {
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  table-layout: fixed;
+  background-color: white;
+  color: black;
+}
+
+.light-mode table caption {
+  font-size: 1.5em;
+  margin: .5em 0 .75em;
+  color: black;
+}
+
+.light-mode table thead tr {
+  background-color: #f2f2f2; /* Same color as even rows */
+}
+
+.light-mode table tbody tr:nth-child(odd) {
+  background-color: white;
+}
+
+.light-mode table tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.light-mode table th,
+.light-mode table td {
+  padding: .625em;
+  text-align: center;
+}
+
+.light-mode table th {
+  font-size: .85em;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.light-mode table td::before {
+  float: left;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+/* Dark Mode Styles */
+.dark-mode {
+  background-color: #121212;
+  color: white;
+}
+
+.dark-mode table {
+  border: 1px solid #333;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  table-layout: fixed;
+  background-color: #333;
+  color: white;
+}
+
+.dark-mode table caption {
+  font-size: 1.5em;
+  margin: .5em 0 .75em;
+  color: white;
+}
+
+.dark-mode table thead tr {
+  background-color: #555; /* Same color as even rows */
+}
+
+.dark-mode table tbody tr:nth-child(odd) {
+  background-color: #444;
+}
+
+.dark-mode table tbody tr:nth-child(even) {
+  background-color: #555;
+}
+
+.dark-mode table th,
+.dark-mode table td {
+  padding: .625em;
+  text-align: center;
+}
+
+.dark-mode table th {
+  font-size: .85em;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.dark-mode table td::before {
+  float: left;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 600px) {
+  table {
+    border: 0;
+  }
+
+  table caption {
+    font-size: 1.3em;
+  }
+
+  table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+
+  table tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: .625em;
+  }
+
+  table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: .8em;
+    text-align: right;
+  }
+
+  table td::before {
+    content: attr(data-label);
+  }
+
+  table td:last-child {
+    border-bottom: 0;
+  }
+
+  .dark-mode table tr {
+    border-bottom: 3px solid #555;
+  }
+
+  .dark-mode table td {
+    border-bottom: 1px solid #555;
+  }
+}
+
+.navbar {
+  display: flex;
+  flex-direction: column;
+}
+
+.caption-slippage-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.backtest-caption {
+  margin: 0;
+}
+
+.slippage-select-container {
+  margin-left: 20px;
+}
+
+@media (max-width: 600px) {
+  .caption-slippage-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .slippage-select-container {
+    margin-left: 0;
+    margin-top: 10px;
+  }
+}
+.backtest-results-container {
+  width: 20%;
+  margin: 10px; /* Margin on all sides */
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+/* Center the table inside the container */
+.backtest-results-container table {
+  margin: 0 auto;
+}
+
+/* Style for the table caption */
+.backtest-results-container caption {
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+/* Apply margin to the button */
+.backtest-results-container button {
+  margin: 10px;
+}
+.navbar {
+  width: 80%; /* Adjust width as needed */
+  margin: 20px auto; /* Center the navbar horizontally with margin */
+  padding: 10px; /* Add padding for spacing */
+  border: 1px solid #ccc; /* Add border for visual separation */
+}
+
+.backtest-heading {
+  margin-bottom: 10px; /* Add margin below the heading */
+}
+
+.slippage-select-container {
+  margin-bottom: 10px; /* Add margin below the slippage select */
+}
+
+.slippage-label {
+  font-weight: bold; /* Make the slippage label bold */
+}
+
+.slippage-select {
+  padding: 5px; /* Add padding to the select for spacing */
+  margin-left: 10px; /* Add margin to the left of the select */
+}.dark-mode table thead th {
+  color: black; /* Set text color to black */
+}
+
+
+/* Style the table */
+table {
+  width: 100%;
+  border-collapse: collapse; /* Collapse table borders */
+  margin-bottom: 10px; /* Add margin below the table */
+}
+
+/* Style table headers */
+th {
+  background-color: #f2f2f2; /* Light gray background */
+  padding: 8px; /* Add padding to table headers */
+  text-align: left; /* Align text to the left within table headers */
+}
+
+/* Style table cells */
+td {
+  border: 1px solid #ddd; /* Add border to table cells */
+  padding: 8px; /* Add padding to table cells */
+}
+
+/* Style alternate rows */
+tr:nth-child(even) {
+  background-color: #f2f2f2; /* Light gray background for even rows */
+}
+
+/* Style table caption */
+caption {
+  font-weight: bold; /* Make caption bold */
+  font-size: 1.2em; /* Increase font size */
+  margin-bottom: 10px; /* Add margin below the caption */
+}
