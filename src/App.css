@@ -160,115 +160,125 @@ body {
     border-bottom: 1px solid #555;
   }
 }
+/* App.css */
 
+/* Table row hover effect */
+/* Table row hover effect */
+/* Light Mode Styles */
+.light-mode table tbody tr:hover {
+  background-color: #f9b1f9; /* Light gray background color on hover */
+}
+
+/* Dark Mode Styles */
+.dark-mode table tbody tr:hover {
+  background-color: #640a5a; /* Dark gray background color on hover */
+}
+
+
+.dark-mode thead th {
+  background-color: #333; /* Dark background for dark mode */
+}
+/* Add this to your CSS */
+tr:hover {
+  background-color: #f5f5f5; /* or any other desired background color */
+}
+/* Add hover effect to table rows */
+.table-row:hover {
+  background-color: #f0f0f0; /* Change the background color to a light gray */
+}
+
+/* Add hover effect to action icons */
+.table-row:hover .action-icon {
+  color: #ff6600; /* Change the color to orange */
+}
+
+/* Navbar Styles */
 .navbar {
   display: flex;
   flex-direction: column;
-}
-
-.caption-slippage-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.backtest-caption {
-  margin: 0;
-}
-
-.slippage-select-container {
-  margin-left: 20px;
-}
-
-@media (max-width: 600px) {
-  .caption-slippage-container {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .slippage-select-container {
-    margin-left: 0;
-    margin-top: 10px;
-  }
-}
-.backtest-results-container {
-  width: 20%;
-  margin: 10px; /* Margin on all sides */
-  border: 1px solid #ccc;
+  width: 80%;
+  margin: 20px auto;
   padding: 10px;
+  border: 1px solid #ccc;
 }
 
-/* Center the table inside the container */
-.backtest-results-container table {
-  margin: 0 auto;
-}
-
-/* Style for the table caption */
-.backtest-results-container caption {
-  font-weight: bold;
-  font-size: 1.2em;
-  margin-bottom: 10px;
-}
-
-/* Apply margin to the button */
-.backtest-results-container button {
-  margin: 10px;
-}
-.navbar {
-  width: 80%; /* Adjust width as needed */
-  margin: 20px auto; /* Center the navbar horizontally with margin */
-  padding: 10px; /* Add padding for spacing */
-  border: 1px solid #ccc; /* Add border for visual separation */
+/* Filters Container */
+.filters-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 .backtest-heading {
-  margin-bottom: 10px; /* Add margin below the heading */
+  margin-bottom: 20px;
 }
 
-.slippage-select-container {
-  margin-bottom: 10px; /* Add margin below the slippage select */
+.slippage-select-container,
+.search-container {
+  margin-bottom: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
-.slippage-label {
-  font-weight: bold; /* Make the slippage label bold */
+.slippage-label,
+.search-label {
+  margin-bottom: 5px;
 }
 
-.slippage-select {
-  padding: 5px; /* Add padding to the select for spacing */
-  margin-left: 10px; /* Add margin to the left of the select */
-}.dark-mode table thead th {
-  color: black; /* Set text color to black */
+.slippage-select,
+.search-input {
+  width: 50%;
+  padding: 8px;
+  box-sizing: border-box;
 }
 
+/* Media query for larger screens */
+@media (min-width: 768px) {
+  .filters-container {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
 
-/* Style the table */
+  .slippage-select-container,
+  .search-container {
+    width: 25%;
+    margin-bottom: 0;
+  }
+
+  .slippage-select,
+  .search-input {
+    width: 100%;
+  }
+}
+
+/* Table Styles */
 table {
   width: 100%;
-  border-collapse: collapse; /* Collapse table borders */
-  margin-bottom: 10px; /* Add margin below the table */
+  border-collapse: collapse;
+  margin-bottom: 10px;
 }
 
-/* Style table headers */
 th {
-  background-color: #f2f2f2; /* Light gray background */
-  padding: 8px; /* Add padding to table headers */
-  text-align: left; /* Align text to the left within table headers */
+  background-color: #f2f2f2;
+  padding: 8px;
+  text-align: left;
 }
 
-/* Style table cells */
 td {
-  border: 1px solid #ddd; /* Add border to table cells */
-  padding: 8px; /* Add padding to table cells */
+  border: 1px solid #ddd;
+  padding: 8px;
 }
 
-/* Style alternate rows */
 tr:nth-child(even) {
-  background-color: #f2f2f2; /* Light gray background for even rows */
+  background-color: #f2f2f2;
 }
 
-/* Style table caption */
 caption {
-  font-weight: bold; /* Make caption bold */
-  font-size: 1.2em; /* Increase font size */
-  margin-bottom: 10px; /* Add margin below the caption */
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-bottom: 10px;
 }

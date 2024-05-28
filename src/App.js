@@ -1,31 +1,46 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 import "react-super-responsive-table/dist/SuperResponsiveTableStyle.css";
+import { FaEye, FaShoppingCart } from 'react-icons/fa'; 
 const BacktestResults = ({ results }) => {
   const [selectedSlippage, setSelectedSlippage] = useState("0%");
-  const [sortConfig, setSortConfig] = useState({ key: null, direction: "ascending" });
+  const [sortConfig, setSortConfig] = useState({
+    key: null,
+    direction: "ascending",
+  });
+  const [searchQuery, setSearchQuery] = useState("");
 
   const handleSlippageChange = (event) => {
     setSelectedSlippage(event.target.value);
   };
 
+  const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value.toLowerCase());
+  };
+
   const filteredBacktests = results.Backtests.filter(
     (backtest) => backtest.Slippage === selectedSlippage
   );
-
+  const colors = [
+    "#DDA0DD", "#EE82EE", "#DA70D6", "#FF00FF", "#FF00FF", "#BA55D3", 
+    "#9370DB", "#8A2BE2", "#9400D3", "#9932CC", "#8B008B", "#800080", "#4B0082"
+  ];
   const getCalmarRatioColor = (calmarRatio) => {
-    if (calmarRatio >= 5) return '#008080'; // Dark Blue
-    if (calmarRatio >= 4.5) return '#008B8B'; // Blue
-    if (calmarRatio >= 4) return '#5F9EA0'; // Intermediate Blue 1
-    if (calmarRatio >= 3.5) return '#20B2AA'; // Intermediate Blue 2
-    if (calmarRatio >= 3) return '#00CED1'; // Intermediate Blue 3
-    if (calmarRatio >= 2.5) return '#48D1CC'; // Intermediate Blue 4
-    if (calmarRatio >= 2) return '#40E0D0'; // Intermediate Blue 5
-    if (calmarRatio >= 1.5) return '#66CDAA'; 
-    if (calmarRatio >= 1) return '#7FFFD4'; // Intermediate Blue 6
-    if (calmarRatio >= 0.5) return '#AFEEEE'; // Intermediate Blue 6
-    return '#ffffff'; // White
+  if (calmarRatio >= 5) return colors[13]; // Index 13 corresponds to calmar ratio >= 5
+  if (calmarRatio >= 4.5) return colors[12]; // Index 12 corresponds to calmar ratio >= 4.5
+  if (calmarRatio >= 4) return colors[11]; // Index 11 corresponds to calmar ratio >= 4
+  if (calmarRatio >= 3.75) return colors[10]; // Index 10 corresponds to calmar ratio >= 3.75
+  if (calmarRatio >= 3.5) return colors[9]; // Index 9 corresponds to calmar ratio >= 3.5
+  if (calmarRatio >= 3) return colors[8]; // Index 8 corresponds to calmar ratio >= 3
+  if (calmarRatio >= 2.75) return colors[7]; // Index 7 corresponds to calmar ratio >= 2.75
+  if (calmarRatio >= 2.5) return colors[6]; // Index 6 corresponds to calmar ratio >= 2.5
+  if (calmarRatio >= 2.25) return colors[5]; // Index 5 corresponds to calmar ratio >= 2.25
+  if (calmarRatio >= 2) return colors[4]; // Index 4 corresponds to calmar ratio >= 2
+  if (calmarRatio >= 1.5) return colors[3]; // Index 3 corresponds to calmar ratio >= 1.5
+  if (calmarRatio >= 1) return colors[2]; // Index 2 corresponds to calmar ratio >= 1
+  if (calmarRatio >= 0.5) return colors[1]; // Index 1 corresponds to calmar ratio >= 0.5
+  return colors[0]; // Index 8 corresponds to calmar ratio < 0.5
   };
 
   const sortData = (data, key, direction) => {
@@ -46,7 +61,11 @@ const BacktestResults = ({ results }) => {
 
   useEffect(() => {
     filteredBacktests.forEach((backtest) => {
-      backtest.Results = sortData(backtest.Results, sortConfig.key, sortConfig.direction);
+      backtest.Results = sortData(
+        backtest.Results,
+        sortConfig.key,
+        sortConfig.direction
+      );
     });
   }, [sortConfig, filteredBacktests]);
 
@@ -57,30 +76,53 @@ const BacktestResults = ({ results }) => {
     return "↕";
   };
 
+  const filteredResults = filteredBacktests.map((backtest) => ({
+    ...backtest,
+    Results: backtest.Results.filter(
+      (result) =>
+        result.Name.toLowerCase().includes(searchQuery) ||
+        result.Rank.toString().includes(searchQuery)
+    ),
+  }));
+
   return (
     <div className="navbar">
-      <h2 className="backtest-heading">Backtest Results</h2>
-      <div className="slippage-select-container">
-        <label htmlFor="slippage-select" className="slippage-label">
-          Slippage:{" "}
-        </label>
-        <select
-          id="slippage-select"
-          value={selectedSlippage}
-          onChange={handleSlippageChange}
-          className="slippage-select"
-        >
-          <option value="0%">0%</option>
-          <option value="0.5%">0.5%</option>
-          <option value="1%">1%</option>
-        </select>
+      <div className="filters-container">
+        <h2 className="backtest-heading">Backtest Results</h2>
+        <div className="slippage-select-container">
+          <label htmlFor="slippage-select" className="slippage-label">
+            Slippage:{" "}
+          </label>
+          <select
+            id="slippage-select"
+            value={selectedSlippage}
+            onChange={handleSlippageChange}
+            className="slippage-select"
+          >
+            <option value="0%">0%</option>
+            <option value="0.5%">0.5%</option>
+            <option value="1%">1%</option>
+          </select>
+        </div>
+        <div className="search-container">
+          <label htmlFor="search-input" className="search-label">
+            Search:{" "}
+          </label>
+          <input
+            id="search-input"
+            type="text"
+            value={searchQuery}
+            onChange={handleSearchChange}
+            className="search-input"
+          />
+        </div>
       </div>
-      {filteredBacktests.map((backtest, index) => (
+      {filteredResults.map((backtest, index) => (
         <div key={index}>
           <Table>
             <caption>Basic Backtest</caption>
             <Thead>
-              <Tr>
+            <Tr >
                 <Th scope="col" onClick={() => handleSort("Rank")}>
                   Rank {getSortIcon("Rank")}
                 </Th>
@@ -107,22 +149,30 @@ const BacktestResults = ({ results }) => {
             </Thead>
             <Tbody>
               {backtest.Results.map((result, idx) => (
-                <Tr key={idx}>
+                <Tr key={idx} className="table-row"
+                >
                   <Td scope="row" data-label="Rank">
                     {result.Rank}
                   </Td>
                   <Td data-label="Name">{result.Name}</Td>
                   <Td
-                    style={{ backgroundColor: getCalmarRatioColor(result.CalmarRatio) }}
+                    style={{
+                      backgroundColor: getCalmarRatioColor(result.CalmarRatio),
+                    }}
                     data-label="Calmar Ratio"
                   >
                     {result.CalmarRatio}
                   </Td>
-                  <Td data-label="Overall Profit">{result.OverallProfit}</Td>
-                  <Td data-label="Average Daily Profit">{result.AvgDailyProfit}</Td>
+                  <Td data-label="Overall Profit">₹{result.OverallProfit}</Td>
+                  <Td data-label="Average Daily Profit">
+                    ₹{result.AvgDailyProfit}
+                  </Td>
                   <Td data-label="Win % per Day">{result["Win %(Day)"]}</Td>
-                  <Td data-label="Price (Rs)">{result.Price}</Td>
-                  <Td data-label="Action">{result.Action}</Td>
+                  <Td data-label="Price (Rs)"> {result.Price}</Td>
+                  <Td data-label="Action">
+  {result.Action === "View" ? <FaEye /> : result.Action === "Buy" ? <FaShoppingCart /> : result.Action}
+</Td>
+
                 </Tr>
               ))}
             </Tbody>
